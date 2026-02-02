@@ -1,0 +1,143 @@
+
+{% extends 'master/base.html' %}
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Doctors</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+
+        .category-list-box {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-list-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .category-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .category-table th,
+        .category-table td {
+            text-align: left;
+            padding: 12px 15px;
+        }
+
+        .category-table th {
+            background: #ff7e5f;
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .category-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .category-table tr:hover {
+            background: #ffe5d6;
+            transition: 0.3s;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            margin-right: 5px;
+            transition: 0.3s;
+        }
+
+        .view-btn {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        .view-btn:hover {
+            background-color: #45a049;
+        }
+
+        .edit-btn {
+            background-color: #2196f3;
+            color: #fff;
+        }
+
+        .edit-btn:hover {
+            background-color: #1976d2;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: #fff;
+        }
+
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="doctor-list-box">
+        <h2>Doctor List</h2>
+        {% include 'auth/messages.html' %}
+
+        <table class="doctor-table">
+            <thead>
+                <a href="{% url 'add_doctor' %}" class="action-btn view-btn">Add Doctor</a>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Specialization</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in doc %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.specialization }}</td>
+                    <td>{{ i.phone }}</td>
+                    <td>{{ i.email }}</td>
+                    <td>{{ i.department }}</td>
+                    <td>
+                      
+                        <a href="{% url 'edit_doctor' i.id %}" class="action-btn edit-btn">Edit</a>
+                        <a href="{% url 'delete_doctor' i.id %}" class="action-btn delete-btn">Delete</a>
+                       
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
+{% endblock body %}
