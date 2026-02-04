@@ -1,0 +1,98 @@
+{% extends 'master/base.html' %}
+{% block body %}
+<style>
+.category-form-box {
+    background: #fff;
+    width: 100%;
+    max-width: 420px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    margin: auto;
+    margin-top: 50px;
+}
+
+.category-form-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #444;
+}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type=text]:focus, select:focus, textarea:focus {
+    border-color: #ff7e5f;
+    box-shadow: 0 0 6px rgba(255,126,95,0.5);
+    outline: none;
+}
+
+input[type=submit] {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+input[type=submit]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+</style>
+
+<div class="category-form-box">
+    <h2>Edit Patient</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" value="{{ Pat.name }}">
+
+        <label for="age">Age</label>
+        <input type="text" id="age" name="age" value="{{ Pat.age }}">
+
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender">
+            <option value="Male" {% if Pat.gender == "Male" %}selected{% endif %}>Male</option>
+            <option value="Female" {% if Pat.gender == "Female" %}selected{% endif %}>Female</option>
+            <option value="Others" {% if Pat.gender == "Others" %}selected{% endif %}>Others</option>
+        </select>
+
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="phone" value="{{ Pat.phone }}">
+
+        <label for="address">Address</label>
+        <textarea id="address" name="address">{{ Pat.address }}</textarea>
+
+        <label for="doctor">Assign Doctor</label>
+        <select id="doctor" name="doctor">
+        {% for d in Doc %}
+            <option value="{{ d.id }}" {% if Pat.doctor.id == d.id %}selected{% endif %}>
+                {{ d.name }} ({{ d.department.name }})
+            </option>
+        {% endfor %}
+        </select>
+
+        <input type="submit" value="Update Patient">
+    </form>
+</div>
+{% endblock body %}

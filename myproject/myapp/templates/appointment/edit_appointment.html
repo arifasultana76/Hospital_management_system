@@ -1,0 +1,129 @@
+{% extends 'master/base.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Appointment</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+        .category-form-box {
+            background: #fff;
+            width: 100%;
+            max-width: 420px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            margin: auto;
+        }
+
+        .category-form-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        input[type=text],
+        input[type=date],
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #ff7e5f;
+            box-shadow: 0 0 6px rgba(255, 126, 95, 0.5);
+            outline: none;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        input[type=submit]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="category-form-box">
+        <h2>Edit Appointment</h2>
+
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <label for="patient">Patient</label>
+            <select id="patient" name="patient" required>
+                <option value="">Select Patient</option>
+                {% for p in Pat %}
+                    <option value="{{ p.id }}" 
+                    
+                    {% if  p.id == Appoin.patient.id %}
+                selected
+            {% endif %}
+                        
+                    >{{ p.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="doctor">Doctor</label>
+            <select id="doctor" name="doctor" required>
+                <option value="">Select Doctor</option>
+                {% for d in Doc %}
+                    <option value="{{ d.id }}" 
+                    {% if d.id == Appoin.doctor.id %}
+        selected
+    {% endif %}
+
+                    >{{ d.name }} ({{ d.department.name }})</option>
+                {% endfor %}
+            </select>
+
+            <label for="appointment_date">Appointment Date & Time</label>
+            <input type="date" value="{{ Appoin.appointment_date|date:'Y-m-d' }}" id="appointment_date" name="appointment_date" required>
+
+            <label for="status">Status</label>
+            <select id="status" name="status">
+    <option value="Pending" {% if Appoin.status == "Pending" %}selected{% endif %}>Pending</option>
+    <option value="Completed" {% if Appoin.status == "Completed" %}selected{% endif %}>Completed</option>
+    <option value="Cancelled" {% if Appoin.status == "Cancelled" %}selected{% endif %}>Cancelled</option>
+</select>
+
+
+            <input type="submit" value="Add Appointment">
+        </form>
+    </div>
+
+</body>
+</html>
+{% endblock body %}

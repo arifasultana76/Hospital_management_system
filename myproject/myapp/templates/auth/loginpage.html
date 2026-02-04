@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #43cea2, #185a9d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-box {
+            background: #fff;
+            width: 100%;
+            max-width: 380px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        /* ✅ FIX: style password input also */
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        input[type=text]:focus,
+        input[type=password]:focus {
+            border-color: #43cea2;
+            box-shadow: 0 0 6px rgba(67, 206, 162, 0.5);
+            outline: none;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #43cea2, #185a9d);
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        input[type=submit]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .signup-link a {
+            color: #185a9d;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+        <h2>Login Account</h2>
+        {% include 'auth/messages.html' %}
+
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter username">
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter password">
+
+            <input type="submit" value="Login">
+        </form>
+
+        <div class="signup-link">
+            Don’t have an account?
+            <a href="{% url 'registration' %}">Registration</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

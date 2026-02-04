@@ -1,0 +1,116 @@
+{% extends 'master/base.html' %}
+{% block body %}
+    
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Doctors</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+        .category-list-box {
+            max-width: 1200px;
+            margin: auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-list-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .category-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .category-table th,
+        .category-table td {
+            text-align: left;
+            padding: 12px 15px;
+        }
+
+        .category-table th {
+            background: #ff7e5f;
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .category-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .category-table tr:hover {
+            background: #ffe5d6;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
+        .view-btn { background: #4caf50; color: #fff; }
+        .edit-btn { background: #2196f3; color: #fff; }
+        .delete-btn { background: #f44336; color: #fff; }
+    </style>
+</head>
+
+</body>
+
+    <div class="category-list-box">
+        <h2>Doctor List</h2>
+        {% include 'auth/messages.html' %}
+
+    <!-- Add Doctor button -->
+        <a href="{% url 'add_doctor' %}" class="action-btn view-btn add-btn">Add Doctor</a>
+
+        <table class="category-table">
+            <thead>
+                <tr>
+                   <th>ID</th>
+                   <th>Doctor Name</th>
+                   {% comment %} <th>user</th> {% endcomment %}
+                   <th>Specialization</th>
+                   <th>Phone</th>
+                   <th>Email</th>
+                   <th>Department</th>
+                   <th>Actions</th>
+                </tr>
+            </thead>
+            
+        <tbody>
+            {% for i in doc %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.name }}</td>  
+                {% comment %} <td>{{i.user.username}}</td> {% endcomment %}
+                <td>{{ i.specialization }}</td>
+                <td>{{ i.phone }}</td>
+                <td>{{ i.email }}</td>
+                <td>{{ i.department }}</td>
+                <td>
+                    <a href="{% url 'edit_doctor' i.id %}" class="action-btn edit-btn">Edit</a>
+                    <a href="{% url 'delete_doctor' i.id %}" class="action-btn delete-btn">Delete</a>
+                    {% comment %} <a href="{% url 'doctor_profile' i.id %}" class="action-btn view-btn">doctor Profile</a> {% endcomment %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock body %}

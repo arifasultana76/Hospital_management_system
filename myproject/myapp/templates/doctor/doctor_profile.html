@@ -1,0 +1,96 @@
+{% extends 'master/base.html' %}
+{% block body %}
+  <div class="category-list-box">
+    <h2>Doctor Profile</h2>
+
+    <!-- Doctor Info -->
+    <table class="category-table">
+      <tr>
+        <th>Name</th>
+        <td>{{ Doc.name }}</td>
+      </tr>
+      <tr>
+        <th>Specialization</th>
+        <td>{{ Doc.specialization }}</td>
+      </tr>
+      <tr>
+        <th>Department</th>
+        <td>{{ Doc.department.name }}</td>
+      </tr>
+      <tr>
+        <th>Phone</th>
+        <td>{{ Doc.phone }}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td>{{ Doc.email }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <br />
+
+  <!-- Patients List -->
+  <div class="category-list-box">
+    <h2>Patients Under This Doctor</h2>
+
+    <table class="category-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in Pat %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.name }}</td>
+            <td>{{ i.age }}</td>
+            <td>{{ i.gender }}</td>
+            <td>{{ i.phone }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="5">No patients found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <br />
+
+  <!-- Appointment List -->
+  <div class="category-list-box">
+    <h2>Appointments</h2>
+
+    <table class="category-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Patient</th>
+          <th>Date & Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in Appoin %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ a.patient.name }}</td>
+            <td>{{ a.appointment_date }}</td>
+            <td>{{ a.status }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="4">No appointments found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

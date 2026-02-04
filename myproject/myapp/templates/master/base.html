@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .main-navbar {
+            background: #081c44;
+            padding: 0 20px;
+        }
+
+        .main-navbar .nav-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .main-navbar .nav-item {
+            margin-right: 20px;
+        }
+
+        .main-navbar .nav-link {
+            display: block;
+            padding: 15px 0;
+            color: #fcfbfb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        .main-navbar .nav-link:hover {
+            color: #eb89b7;
+            border-bottom: 2px solid #ffdd57;
+        }
+
+        .main-navbar .logout {
+            color: #ee0a0a;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    {% include "master/nav.html" %}
+    {% block body %}
+
+    {% endblock body %}
+
+</body>
+
+</html>

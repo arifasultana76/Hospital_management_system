@@ -1,0 +1,117 @@
+{% extends 'master/base.html' %}
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Appointments</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+        .category-list-box {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-list-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .category-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .category-table th,
+        .category-table td {
+            text-align: left;
+            padding: 12px 15px;
+        }
+
+        .category-table th {
+            background: #ff7e5f;
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .category-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .category-table tr:hover {
+            background: #ffe5d6;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
+        .view-btn { background: #4caf50; color: #fff; }
+        .edit-btn { background: #2196f3; color: #fff; }
+        .delete-btn { background: #f44336; color: #fff; }
+    </style>
+</head>
+
+<body>
+
+    <div class="category-list-box">
+        <h2>Appointment List</h2>
+        {% include 'auth/messages.html' %}
+
+        <a href="{% url 'add_appointment' %}" class="action-btn view-btn">
+            Add Appointment
+        </a>
+
+        <table class="category-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient Name</th>
+                    <th>Doctor Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for i in Appointment %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.patient_name }}</td>
+                    <td>{{ i.doctor_name }}</td>
+                    <td>{{ i.date }}</td>
+                    <td>{{ i.time }}</td>
+                    <td>{{ i.notes }}</td>
+                    <td>
+                        <a href="{% url 'edit_appointment' i.id %}" class="action-btn edit-btn">Edit</a>
+                        <a href="{% url 'delete_appointment' i.id %}" class="action-btn delete-btn">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
+
+{% endblock body %}

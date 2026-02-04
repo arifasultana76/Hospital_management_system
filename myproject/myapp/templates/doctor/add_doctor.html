@@ -1,0 +1,86 @@
+{% extends 'master/base.html' %}
+{% block body %}
+  <div class="category-form-box">
+    <h2>Add Doctor</h2>
+
+    <form action="" method="post">
+      {% csrf_token %}
+
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter doctor's name" required />
+
+      <label for="specialization">Specialization</label>
+      <input type="text" id="specialization" name="specialization" placeholder="Enter specialization" required />
+
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" name="phone" placeholder="Enter phone number" required />
+
+      <label for="uname">Username</label>
+      <input type="text" id="uname" name="username" placeholder="Your username.." />
+
+      <label for="pass">Password</label>
+      <input type="password" id="pass" name="password" placeholder="Your password.." />
+
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" placeholder="Enter email" required />
+
+      <label for="department">Department</label>
+      <select id="department" name="department" required>
+        <option value="">Select Department</option>
+        {% for d in dept %}
+          <option value="{{ d.id }}">{{ d.name }}</option>
+        {% endfor %}
+      </select>
+
+      <input type="submit" value="Add Doctor" />
+    </form>
+  </div>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+    
+    .category-form-box {
+      max-width: 420px;
+      margin: auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .category-form-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    
+    input[type='text'],
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    
+    input[type='submit'] {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+{% endblock %}

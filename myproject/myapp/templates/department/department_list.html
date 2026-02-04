@@ -1,0 +1,111 @@
+{% extends 'master/base.html' %}
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Departments</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+        .category-list-box {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-list-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .category-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .category-table th,
+        .category-table td {
+            text-align: left;
+            padding: 12px 15px;
+        }
+
+        .category-table th {
+            background: #ff7e5f;
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .category-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .category-table tr:hover {
+            background: #ffe5d6;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
+        .view-btn { background: #4caf50; color: #fff; }
+        .edit-btn { background: #2196f3; color: #fff; }
+        .delete-btn { background: #f44336; color: #fff; }
+    </style>
+</head>
+
+<body>
+
+    <div class="category-list-box">
+        <h2>Department List</h2>
+        {% include 'auth/messages.html' %}
+
+        <a href="{% url 'add_department' %}" class="action-btn view-btn">
+            Add Department
+        </a>
+
+        <table class="category-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for i in Dept %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.location }}</td>
+                    <td>
+                        <a href="{% url 'edit_department' i.id %}" class="action-btn edit-btn">Edit</a>
+                        <a href="{% url 'delete_department' i.id %}" class="action-btn delete-btn">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
+
+{% endblock body %}

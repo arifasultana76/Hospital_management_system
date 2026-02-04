@@ -1,0 +1,138 @@
+ <nav class="main-navbar">
+  <ul class="nav-list">
+    <li class="nav-item">
+      <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+    </li>
+
+    <li class="nav-item">
+      <a href="{% url 'department_list' %}" class="nav-link">Departments</a>
+    </li>
+
+    <li class="nav-item">
+      <a href="{% url 'doctor_list' %}" class="nav-link">Doctors</a>
+    </li>
+
+    <li class="nav-item">
+      <a href="{% url 'patient_list' %}" class="nav-link">Patients</a>
+    </li>
+
+    <li class="nav-item">
+      <a href="{% url 'appointment_list' %}" class="nav-link">Appointments</a>
+    </li>
+
+    <li class="nav-item">
+      <a href="{% url 'changepassword' %}" class="nav-link">Change Password</a>
+    </li>
+
+    <li class="nav-item">
+      <a href="{% url 'logoutpage' %}" class="nav-link logout">Logout</a>
+    </li>
+  </ul>
+</nav> 
+
+{% comment %} <li class="nav-item">
+  <a href="{% url 'doctor_profile' request.user.doctor.id %}" class="nav-link">Doctor Profile</a>
+</li> {% endcomment %}
+
+{% comment %}==== Condition use kore try korechilam 2/3 vabe ===={% endcomment %}
+
+{% comment %} <nav class="main-navbar">
+  <ul class="nav-list">
+    <li class="nav-item">
+      <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+    </li>
+
+    {% if request.user.is_authenticated %}
+      {% if request.user.user_types == 'Admin' %}
+        <li class="nav-item">
+          <a href="{% url 'department_list' %}" class="nav-link">Departments</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'doctor_list' %}" class="nav-link">Doctors</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'patient_list' %}" class="nav-link">Patients</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'appointment_list' %}" class="nav-link">Appointments</a>
+        </li>
+      {% elif request.user.user_types == 'Doctor' %}
+        <li class="nav-item">
+          <a href="{% url 'patient_list' %}" class="nav-link">Patients</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'appointment_list' %}" class="nav-link">Appointments</a>
+        </li>
+      {% elif request.user.user_types == 'Patient' %}
+        <li class="nav-item">
+          <a href="{% url 'doctor_list' %}" class="nav-link">Doctors</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'appointment_list' %}" class="nav-link">Appointments</a>
+        </li>
+      {% endif %}
+
+      <li class="nav-item">
+        <a href="{% url 'changepassword' %}" class="nav-link">Change Password</a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'logoutpage' %}" class="nav-link logout">Logout</a>
+      </li>
+    {% endif %}
+  </ul>
+</nav> {% endcomment %}
+
+
+
+{% comment %}
+
+<nav class="main-navbar">
+  <ul class="nav-list">
+    <li class="nav-item">
+      <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+    </li>
+
+    {% if request.user.user_types == 'Admin' %}
+      <li class="nav-item">
+        <a href="{% url 'department_list' %}" class="nav-link">Departments</a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'doctor_list' %}" class="nav-link">Doctors</a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'patient_list' %}" class="nav-link">Patients</a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'appointment_list' %}" class="nav-link">Appointments</a>
+      </li>
+    {% elif request.user.user_types == 'Doctor' %}
+      <li class="nav-item">
+        <a href="{% url 'doctor_list' %}" class="nav-link">Doctors</a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'patient_list' %}" class="nav-link">Patients</a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'appointment_list' %}" class="nav-link">Appointments</a>
+      </li>
+    {% elif request.user.user_types == 'Patient' %}
+      <li class="nav-item">
+        <a href="{% url 'doctor_list' %}" class="nav-link">Doctors</a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'patient_list' %}" class="nav-link">Patients</a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'appointment_list' %}" class="nav-link">Appointments</a>
+      </li>
+    {% endif %} {% endcomment %}
+
+    <!-- Common for ALL -->
+    {% comment %} <li class="nav-item">
+      <a href="{% url 'changepassword' %}" class="nav-link">Change Password</a>
+    </li>
+    <li class="nav-item">
+      <a href="{% url 'logoutpage' %}" class="nav-link logout">Logout</a>
+    </li>
+  </ul>
+</nav> {% endcomment %}
