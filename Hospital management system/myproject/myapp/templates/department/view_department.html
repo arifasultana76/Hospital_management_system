@@ -1,0 +1,91 @@
+
+{% extends 'master/base.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>View Department</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+
+        .category-view-box {
+            background: #fff;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-view-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .category-field {
+            margin-bottom: 20px;
+        }
+
+        .category-field label {
+            display: block;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 6px;
+        }
+
+        .category-field p {
+            background: #f7f7f7;
+            padding: 12px 15px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            color: #555;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 18px;
+            background: #2196f3;
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #1976d2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="department-view-box">
+        <h2>View Department</h2>
+
+        <div class="department-field">
+            <label>Name</label>
+            <p>{{ view.name }}</p>
+        </div>
+
+        <div class="department-field">
+            <label>Location</label>
+            <p>{{ view.location }}</p>
+        </div>
+
+        <a href="{% url 'department_list' %}" class="back-btn">Back to List</a>
+    </div>
+
+</body>
+
+</html>
+{% endblock body %}
